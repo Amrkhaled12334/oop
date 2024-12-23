@@ -1,20 +1,57 @@
-using System;
+
 namespace MyConsoleApp
 {
-public struct Point
-{
-    public double X { get; set; }
-    public double Y { get; set; }
+using System;
 
-    public Point(double x, double y)
+public enum SecurityLevel
+{
+    Guest,
+    Developer,
+    Secretary,
+    DBA
+}
+
+public class HiringDate
+{
+    public int Day { get; set; }
+    public int Month { get; set; }
+    public int Year { get; set; }
+
+    public HiringDate(int day, int month, int year)
     {
-        X = x;
-        Y = y;
+        Day = day;
+        Month = month;
+        Year = year;
     }
 
-    public static double CalculateDistance(Point p1, Point p2)
+    public override string ToString()
     {
-        return Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2));
+        return $"{Day}/{Month}/{Year}";
+    }
+}
+
+public class Employee
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public char Gender { get; set; }
+    public SecurityLevel SecurityLevel { get; set; }  // This property now refers to a public enum
+    public double Salary { get; set; }
+    public HiringDate HireDate { get; set; }
+
+    public Employee(int id, string name, char gender, SecurityLevel securityLevel, double salary, HiringDate hireDate)
+    {
+        ID = id;
+        Name = name;
+        Gender = gender;
+        SecurityLevel = securityLevel;
+        Salary = salary;
+        HireDate = hireDate;
+    }
+
+    public override string ToString()
+    {
+        return $"{Name} ({SecurityLevel}): Salary: {String.Format("{0:C}", Salary)}, Hire Date: {HireDate}";
     }
 }
 }
